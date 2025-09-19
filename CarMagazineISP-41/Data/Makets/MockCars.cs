@@ -74,11 +74,9 @@ namespace CarMagazineISP_41.Data.Makets
             },
 
         };
-        public IEnumerable<Car> GetFavCars { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IEnumerable<Car> GetFavCars => Cars.Where(c=>c.IsFavourite==true);
 
-        public Car GetOneCar(int carId)
-        {
-            throw new NotImplementedException();
-        }
+        public Car GetOneCar(int carId) => Cars.FirstOrDefault(c => c.CarId == carId);
+       
     }
 }
