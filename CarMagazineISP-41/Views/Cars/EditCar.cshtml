@@ -1,0 +1,66 @@
+﻿@model CarMagazineISP_41.Data.Models.Car
+
+<form class="p-a-1" asp-action="EditCar" method="post" enctype="multipart/form-data">
+    <div class="form-group col-md-6" >
+
+        <input class=" form-control" asp-for="CarId" type="hidden"/>
+
+    </div>
+    <div class="form-row">
+        <div class="formgroup col-md-6">
+            <label asp-for="CarName">
+                Название
+            </label>
+            <input class=" form-control" asp-for="CarName" />
+
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="ShortDescription">
+                Краткое описание
+            </label>
+            <input class=" form-control" asp-for="ShortDescription" />
+
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class=" form-group"><label asp-for="LongDescription">полное описание</label> <textarea class=" form-control" rows="3" asp-for="LongDescription"></textarea></div>
+        <div class="formgroup col-md-6">
+            <label asp-for="Price">
+                Цена
+            </label>
+            <input class=" form-control" asp-for="Price" />
+
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="CategoryId">
+                Id Категории
+            </label>
+            <input class=" form-control" asp-for="CategoryId" />
+
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-check col-md-5">
+            <label asp-for="IsFavourite">
+                <input asp-for="IsFavourite" class="form-check-input" type="checkbox" />
+                Доступен на главной странице
+            </label>
+
+        </div>
+        <div class="form-check col-md-5">
+            <label asp-for="Available">
+                <input asp-for="Available" class="form-check-input" type="checkbox" />
+                Товар доступен к заказу
+            </label>
+
+        </div>
+        <div class=" form-group">
+            <label asp-for="Img">Картинка</label>
+            <input asp-for="Img" type="file" name="uploadedFile" /></br>
+        </div>
+    </div>
+    <button type="submit" class="btn-primary">Save</button>
+
+</form></>
+

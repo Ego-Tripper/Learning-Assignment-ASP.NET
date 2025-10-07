@@ -1,5 +1,7 @@
 ﻿@using CarMagazineISP_41.Data.Models
-@model List<Car>
+@using CarMagazineISP_41.Data.ViewModels
+@model IndexPagingModels
+
 <h1 style=" align-self:center">Hello world!</h1>
 <div id="carouselExample" class="carousel slide">
     <div class="carousel-inner">
@@ -22,21 +24,30 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+<div>
+    @{
+        for (int i = 1; i <= Model.MaxPage; i++)
+        {
+            <a href='?page=@i.ToString()'>@i.ToString()></a>
+        }
+    }
+</div>
 <div class="container" style="display: flex;gap:10px; margin-top: 20px;" >
+
 @{
 
-    foreach (var car in Model)
-    {
+        foreach (var car in Model.Cars)
+        {
 
-     
-        <div class="card" style="width: 18rem;">
-            <img src="@car.Img" class="card-img-top" alt="...">
+
+            <div class="card" style="width: 18rem;">
+                <img src="@car.Img" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">@car.CarName</h5>
             <p class="card-text">@car.ShortDescription</p>
             <p class="card-text">@car.LongDescription</p>
             <p class="card-text">@car.Price.ToString()</p>
-            <a href="#" class="btn btn-primary">Подробнее</a>
+            <button onclick="location.href='@Url.Action("CarInfo", "Home", new { carId = car.CarId})'" class="btn btn-primary">Подробнее</button>
         </div>
     </div>
     }

@@ -1,0 +1,20 @@
+﻿@model Car
+<div class="card" style="width: 18rem;">
+    <img src="@Model.Img" class="card-img-top" alt="@Model.CarName">
+    <div class="card-body">
+        <h5 class="card-title">@Model.CarName</h5>
+        <p class="card-text">@Model.ShortDescription</p>
+        <p class="card-text">@Model.LongDescription</p>
+        <p class="card-text">@Model.Price.ToString()</p>
+        <a href="#" class="btn btn-primary">Подробнее</a>
+    </div>
+    <button class="btn btn-primary" onclick="location.href='@Url.Action("EditCar", "Cars", new { carId = Model.CarId })'">Редактировать</button>
+    <form asp-controller="Cars" asp-action="DeleteCar" method="post" style="display: inline;">
+        <input type="hidden" name="carId" value="@Model.CarId" />
+        <button type="submit" class="btn btn-danger"
+                onclick="return confirm('Вы уверены, что хотите удалить этот автомобиль?')">
+            Удалить
+        </button>
+    </form>
+    <button class="btn btn-success">Добавление в корзину</button>
+</div>
