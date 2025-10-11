@@ -25,8 +25,19 @@ namespace CarMagazineISP_41.Controllers
             ViewBag.Title = "main page";
             //ViewBag.maxPage = MaxPage;
             MockCars mockCars = new MockCars();
-            return View(
-                new IndexPagingModels { Cars=db.Cars.OrderBy(c => c.CarId).Skip((page - 1) * pageSize).Take(pageSize).ToList(), MaxPage=MaxPage});
+            return View(new IndexPagingModels
+            {
+                Cars = db.Cars.OrderBy(c => c.CarId)
+                   .Skip((page - 1) * pageSize)
+                   .Take(pageSize)
+                   .ToList(),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = pageSize,
+                    TotalItems = db.Cars.Count()
+                }
+            });
         }
         public IActionResult Error()
         {
