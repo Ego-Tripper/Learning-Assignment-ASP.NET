@@ -12,6 +12,7 @@ namespace CarMagazineISP_41.Data.Infostructure
     [HtmlTargetElement("div", Attributes = "page-model")]
     public class PageLinkTagHelper : TagHelper//дескрипторный вспомогательный класс
     {
+        public static int categoryId;
 
         private IUrlHelperFactory _urlHelperFactory;
         public PageLinkTagHelper(IUrlHelperFactory urlHelperFactory)
@@ -22,10 +23,11 @@ namespace CarMagazineISP_41.Data.Infostructure
         [ViewContext]
         [HtmlAttributeNotBound]
         
-        public ViewContext? ViewContext { get; set; }
+        public ViewContext ViewContext { get; set; }
+        [HtmlAttributeName(DictionaryAttributePrefix ="page-url-")]
+        public Dictionary<string, object> PageUrlValues { get; set; }= new Dictionary<string, object>();
         public string PageAction { get; set; }
         public PagingInfo? PageModel { get; set; }
-
         public bool PageClassesEnabled {  get; set; }=false;
         public string PageClass { get; set; }
         public string PageClassNormal { get; set; }
@@ -39,7 +41,12 @@ namespace CarMagazineISP_41.Data.Infostructure
             for (int i = 1; i <= PageModel.TotalPages; i++)
             {
                 TagBuilder aTag = new TagBuilder("a");
-                aTag.Attributes["href"] = urlHelper.Action(PageAction, new {page=i});
+
+                PageUrlValues["category"] = categoryId;
+                PageUrlValues["page"] = i;
+
+                aTag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
+
                 if (PageClassesEnabled)
                 {
                     aTag.AddCssClass(PageClass);

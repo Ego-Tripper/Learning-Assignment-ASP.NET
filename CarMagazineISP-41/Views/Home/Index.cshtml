@@ -3,7 +3,7 @@
 @model IndexPagingModels
 
 <h1 style=" align-self:center">Hello world!</h1>
-<div id="carouselExample" class="carousel slide">
+<div id="carouselExample" class="carousel slide ">
     <div class="carousel-inner">
         <div class="carousel-item active" >
             <img src="~/Img/Slider/Track.jpg" style="height: 600px; width: 500px" class="d-block w-100" alt="...">
@@ -25,12 +25,18 @@
     </button>
 </div>
 
-
+<div class="row">
+    <div class="col col-md-2">
+        @await Component.InvokeAsync("NavigationMenu")
+    </div>
+    <div class="col col-md-10">
+    
 <div page-model="@Model.PagingInfo" page-action="Index"
      page-classes-enabled="true"
      page-class="btn"
      page-class-normal="btn-deafult"
-     page-class-selected="btn-primary">
+     page-class-selected="btn-primary"
+     class="btn-group pull-right">
 </div>
 
 
@@ -56,7 +62,7 @@
     }
 }
 </div>
-
-
+    </div>
+</div>
 
 

@@ -2,8 +2,8 @@
 using CarMagazineISP_41.Data.Models;
 using CarMagazineISP_411.Data.Context;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using CarMagazineISP_41.Data.ViewModels;
+using CarMagazineISP_41.Data.Infostructure;
 
 namespace CarMagazineISP_41.Controllers
 {
@@ -19,15 +19,19 @@ namespace CarMagazineISP_41.Controllers
         {
             db = context;
         }
-        public IActionResult Index(int page=1)
+        
+        public IActionResult Index(int category=1, int page=1)
 
         {
             ViewBag.Title = "main page";
+            PageLinkTagHelper.categoryId=category;
             //ViewBag.maxPage = MaxPage;
             MockCars mockCars = new MockCars();
             return View(new IndexPagingModels
             {
-                Cars = db.Cars.OrderBy(c => c.CarId)
+                Cars = db.Cars
+                   .OrderBy(c => c.CarId)
+                   .Where(c=>c.CategoryId==category)
                    .Skip((page - 1) * pageSize)
                    .Take(pageSize)
                    .ToList(),
@@ -35,8 +39,12 @@ namespace CarMagazineISP_41.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    TotalItems = db.Cars.Count()
-                }
+                    TotalItems = db.Cars
+                    .Where(c=>c.CategoryId==category)
+                    .Count()
+                    
+                },
+                CurretCategory= category
             });
         }
         public IActionResult Error()
@@ -61,6 +69,10 @@ namespace CarMagazineISP_41.Controllers
             Car? car = db.Cars.Find(carId);
             return View(db.Cars.Find(carId));
         }
-    
+        public IActionResult CarList()
+        {
+            return View(db.Cars.ToList());
+        }
+
     }
 }
