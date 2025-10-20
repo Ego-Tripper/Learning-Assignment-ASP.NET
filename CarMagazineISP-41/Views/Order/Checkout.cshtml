@@ -1,0 +1,43 @@
+﻿@model Order
+<div class="container">
+    <h3>Order</h3>
+    <form asp-action="Checkout"asp-controller="Order"method="post" class="form-horizontal">
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <div class="col -md5">
+                <input asp-for=Name class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SName"></label>
+            <div class="col -md5">
+                <input asp-for=SName class="form-control" />
+                <span asp-validation-for="SName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Adres"></label>
+            <div class="col -md5">
+                <input asp-for=Adres class="form-control" />
+                <span asp-validation-for="Adres" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone"></label>
+            <div class="col -md5">
+                <input asp-for=Phone class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <div class="col -md5">
+                <input asp-for=Email class="form-control" />
+                <span asp-validation-for="Email" class="text-danger" />
+            </div>
+        </div>
+        <input class="btn btn-warning" type="submit"value="Create Order"/>
+    </form>
+
+</div>

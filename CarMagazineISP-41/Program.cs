@@ -17,7 +17,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
 builder.Services.AddScoped(sp => ShopCart.GetCar(sp));
 builder.Services.AddMemoryCache();
-builder.Services.AddSession();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = ".MyApp.Session";
+    options.IdleTimeout = TimeSpan.FromSeconds(3600);
+    options.Cookie.IsEssential = true;
+});
 
 
 

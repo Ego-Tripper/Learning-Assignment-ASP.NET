@@ -12,6 +12,8 @@ namespace CarMagazineISP_411.Data.Context
         public DbSet<Car> Cars { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ShopCartItem> ShopCarItem { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
