@@ -1,5 +1,5 @@
 using CarMagazineISP_41;
-
+using CarMagazineISP_41.Data.Models;
 using CarMagazineISP_411.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +14,12 @@ builder.Services.AddDbContext<CarDbContext>(options =>
     options.UseSqlServer(connection));
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+builder.Services.AddScoped(sp => ShopCart.GetCar(sp));
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+
+
 
 var app = builder.Build();
 
@@ -43,6 +49,17 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-app.MapDefaultControllerRoute();
 app.UseStaticFiles();
+app.UseRouting(); 
+
+app.UseAuthentication(); 
+app.UseAuthorization();  
+app.UseSession();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
 app.Run();

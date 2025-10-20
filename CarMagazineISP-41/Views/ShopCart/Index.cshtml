@@ -1,0 +1,13 @@
+﻿@using CarMagazineISP_41.Data.ViewModels;
+@model ShopCartViewModel
+
+<div class="container">
+    @foreach(var el in Model.ShopCar.ShopCarItems)
+    {
+        <div class="alert alert-warning mt-3">
+            <b>Автомобиль:</b>@el.Car.CarName<br/>
+            <b>Цена:</b>@el.Car.Price<br />
+        </div>
+    }
+    <div class=""><b>Итого:</b> @Model.Sum.ToString("c")</div>
+</div>

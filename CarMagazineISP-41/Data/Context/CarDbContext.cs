@@ -11,9 +11,12 @@ namespace CarMagazineISP_411.Data.Context
 
         public DbSet<Car> Cars { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<ShopCartItem> ShopCarItem { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<Category>().HasData(
+                new Category { CategoryId = 1, CategoryName = "Ёдлектромобили" }, new Category { CategoryId = 2, CategoryName = "BurgenTruck" });
         }
     }
 }

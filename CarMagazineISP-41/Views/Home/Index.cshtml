@@ -57,6 +57,7 @@
             <p class="card-text">@car.LongDescription</p>
             <p class="card-text">@car.Price.ToString()</p>
             <button onclick="location.href='@Url.Action("CarInfo", "Home", new { carId = car.CarId})'" class="btn btn-primary">Подробнее</button>
+            <button onclick="location.href='@Url.Action("AddToCart", "ShopCart", new { carId = car.CarId })'" class="btn btn-primary">В корзину</button>
         </div>
     </div>
     }
